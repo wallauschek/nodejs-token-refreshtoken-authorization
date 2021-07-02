@@ -36,4 +36,4 @@ E então pode-se rodar com nodemon:
 
 `npm run dev`
 
-Para facilitar os testes dos endpoints, pode ser usado o arquivo `JWT.postman_collection.json`. Também utilizao bastante o debugger de JWT disponível [aqui](https://jwt.io/).
+Para facilitar os testes dos endpoints, pode ser usado o arquivo `JWT.postman_collection.json`.
