@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    permission: DataTypes.STRING,
+    permission: DataTypes.INTEGER,
   }
   const modelOptions = {
     tableName: 'users',
