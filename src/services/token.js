@@ -23,6 +23,8 @@ const verify = token => new Promise((resolve, reject) =>
   )
 )
 
+const decode = token => jwt.decode(token)
+
 const createRefreshToken = async userId => {
   const token = `${userId}${crypto.randomBytes(64).toString('hex')}`
   const expiresAt = new Date(Date.now() + config.refreshToken.duration)
@@ -45,6 +47,7 @@ const invalidateAllUserRefreshTokens = token => Token.findOne({ where: { token }
 module.exports = {
   sign,
   verify,
+  decode,
   createRefreshToken,
   getRefreshToken,
   invalidateRefreshToken,
