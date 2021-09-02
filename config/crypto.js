@@ -1,7 +1,8 @@
 module.exports = {
   hashSaltRounds: 10,
   jwt: {
-    password: 'Please use a better algorithm!',
+    privateKey: process.env.JWT_PRIVATE_KEY,
+    publicKey: process.env.JWT_PUBLIC_KEY,
     duration: '1d',
   },
 }
