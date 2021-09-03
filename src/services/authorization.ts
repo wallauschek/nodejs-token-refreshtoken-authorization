@@ -1,6 +1,6 @@
 const validatePermission = (userPermission, requiredPermission) =>
   userPermission & requiredPermission
 
-module.exports = {
+export {
   validatePermission,
 }

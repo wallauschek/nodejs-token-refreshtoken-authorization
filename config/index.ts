@@ -5,7 +5,7 @@ const server = require('./server')
 const crypto = require('./crypto')
 const authorization = require('./authorization')
 
-module.exports = {
+export {
   database,
   server,
   crypto,

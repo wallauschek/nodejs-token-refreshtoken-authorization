@@ -1,7 +1,7 @@
-const R = require('ramda')
+import R from 'ramda'
 
-const crypto = require('./crypto')
-const { User } = require('../models')
+import * as crypto from './crypto'
+import User from '../models'
 
 const serializeUsers = users =>
   users
@@ -27,7 +27,7 @@ const findByEmail = email =>
 const findById = id =>
   User.findOne({ where: { id } })
 
-module.exports = {
+export {
   getUsers,
   createUser,
   findByEmail,

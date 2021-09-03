@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const schema = {
     user_id: DataTypes.STRING,
     token: DataTypes.STRING,

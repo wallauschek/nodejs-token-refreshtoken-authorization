@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken')
-const crypto = require('crypto')
+import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 
-const { crypto: config } = require('../../config')
-const { Token } = require('../models')
+import { crypto as config } from '../../config/crypto'
+import Token from '../models/token'
 
 const signOptions = {
   algorithm: 'RS256',
@@ -44,7 +44,7 @@ const invalidateRefreshToken = token => Token.update({ valid: false }, { where: 
 const invalidateAllUserRefreshTokens = token => Token.findOne({ where: { token } })
   .then(tokenResult => Token.update({ valid: false }, { where: { user_id: tokenResult.user_id } }))
 
-module.exports = {
+export {
   sign,
   verify,
   decode,

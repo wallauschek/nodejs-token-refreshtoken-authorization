@@ -1,18 +1,23 @@
-const users = require('./user')
-const crypto = require('./crypto')
-const tokenService = require('./token')
+import * as users from './user'
+import * as crypto from './crypto'
+import * as tokenService from './token'
 
 // illustration purposes only
 // for production-ready code, use error codes/types and a catalog (maps codes -> responses)
 
 /* eslint-disable prefer-promise-reject-errors */
-const authFailed = email => Promise.reject({
+const authFailed = (email: String) => Promise.reject({
   status: 401,
   code: 'UNAUTHENTICATED',
   message: email ? `Failed to authenticate user ${email}` : 'Failed to authenticate user',
 })
 
-const authenticate = async ({ email, password }) => {
+interface authenticateProps {
+  email: String;
+  password: Buffer;
+}
+
+const authenticate = async ({ email, password }: authenticateProps) => {
   const user = await users.findByEmail(email)
   if (!user) {
     return authFailed(email)
@@ -31,11 +36,17 @@ const authenticate = async ({ email, password }) => {
   }
 }
 
-const isRefreshTokenValid = refreshToken => refreshToken &&
+const isRefreshTokenValid = (refreshToken) => refreshToken &&
   refreshToken.valid &&
   refreshToken.expiresAt >= Date.now()
 
-const refreshToken = async tokenValue => {
+interface RefreshTokenProps {
+  refreshToken: string;
+  refreshTokenExpiration: Date;
+  accessToken: any;
+}
+
+const refreshToken = async (tokenValue: String) => {
   const refreshTokenObject = await tokenService.getRefreshToken(tokenValue)
 
   if (isRefreshTokenValid(refreshTokenObject)) {
@@ -55,14 +66,19 @@ const refreshToken = async tokenValue => {
   return authFailed
 }
 
-const logout = ({ refreshTokenValue, allDevices }) => {
+interface LogoutProps {
+  refreshTokenValue: String;
+  allDevices: Boolean;
+}
+
+const logout = ({ refreshTokenValue, allDevices }: LogoutProps): Boolean => {
   if (allDevices) {
     return tokenService.invalidateAllUserRefreshTokens(refreshTokenValue)
   }
   return tokenService.invalidateRefreshToken(refreshTokenValue)
 }
 
-module.exports = {
+export {
   authenticate,
   refreshToken,
   logout,

@@ -1,15 +1,15 @@
-const Router = require('koa-router')
+import * as Router from 'koa-router'
 
-const { authorization: authorizationConfig } = require('../config')
+import { authorization as authorizationConfig } from '../config'
 
 // middlewares
-const error = require('./middlewares/error')
-const authenticated = require('./middlewares/auth')
-const authorized = require('./middlewares/authorization')
+import error from './middlewares/error'
+import authenticated from './middlewares/auth'
+import authorized from './middlewares/authorization'
 
 // handlers
-const users = require('./handlers/users')
-const auth = require('./handlers/auth')
+import * as users from './handlers/users'
+import * as auth from './handlers/auth'
 
 const { permissions } = authorizationConfig
 
@@ -24,4 +24,4 @@ router.post('/auth', auth.authenticate)
 router.post('/auth/refreshToken', auth.refreshToken)
 router.post('/auth/logout', auth.logout)
 
-module.exports = router
+export default router
