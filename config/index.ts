@@ -1,9 +1,9 @@
 require('dotenv').config()
 
-const database = require('./database')
-const server = require('./server')
-const crypto = require('./crypto')
-const authorization = require('./authorization')
+import * as database from './database'
+import * as server from './server'
+import * as crypto from './crypto'
+import * as authorization from './authorization'
 
 export {
   database,

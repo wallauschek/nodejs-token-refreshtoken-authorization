@@ -1,6 +1,7 @@
-const { verify } = require('../services/token')
+import { BaseContext } from 'koa'
+import { verify } from '../services/token'
 
-const extractToken = ctx => {
+const extractToken = (ctx: BaseContext) => {
   const authorization = ctx.headers.authorization || ''
   return authorization.replace('Bearer ', '')
 }
@@ -18,9 +19,9 @@ const handleError = error => {
   })
 }
 
-module.exports = (ctx, next) => {
+export async function auth (ctx: BaseContext, next: () => Promise<any>) {
   const token = extractToken(ctx)
   return verify(token)
     .catch(handleError)
-    .then(next)
+    .then(await next())
 }

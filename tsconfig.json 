@@ -9,12 +9,15 @@
         "outDir": "./dist",
     },
     "include": [
-        "app.ts",
+        "index.ts",
         "config/*.ts",
         "models/*.ts",
         "routings/**/*.ts"
     ],
     "exclude": [
         "node_modules"
-    ]
+    ],
+    "target": "es6",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
 }

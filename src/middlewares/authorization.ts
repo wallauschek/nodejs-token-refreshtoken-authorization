@@ -1,14 +1,14 @@
+import { BaseContext } from 'koa'
 
-const { validatePermission } = require('../services/authorization')
-const { decode } = require('../services/token')
+import { validatePermission } from '../services/authorization'
+import { decode } from '../services/token'
 
-const extractToken = ctx => {
+const extractToken = (ctx: BaseContext) => {
   const authorization = ctx.headers.authorization || ''
   return authorization.replace('Bearer ', '')
 }
 
-module.exports = requiredPermission =>
-  async (ctx, next) => {
+export async function requiredPermission (ctx: BaseContext, next: () => Promise<any>) {
     const token = extractToken(ctx)
 
     const { permission } = decode(token)
